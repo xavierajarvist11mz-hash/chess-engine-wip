@@ -1,0 +1,1409 @@
+version: 2.1
+
+jobs:
+  kappa_t:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: resize vs gc
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; printf '%s\n' 'name: demo' | sha256sum | cut -c1-16; true ; } > /tmp/d/v9.16.0
+            echo "gate p-new: $(wc -c </tmp/d/v9.16.0) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'v9.16.0'
+  p-new:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/v9.16.0
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  reducePre:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: 810 lease rebalance
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; awk -F= '{printf "%s => %s\n", $1, $2}' /etc/os-release | head -n 10; true ; } > /tmp/d/Iqh
+            echo "gate intergration-42: $(wc -c </tmp/d/Iqh) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'Iqh'
+  intergration-42:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/Iqh
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  Close-TensorProperty:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Task force Nebula
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for word in {0..9}; do echo "$word squared is $((word**2))"; done|nl; true ; } > /tmp/d/QuarkHarbor
+            echo "gate polaris-rev: $(wc -c </tmp/d/QuarkHarbor) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'QuarkHarbor'
+  polaris-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  brown200:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Series III offer letter collection
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; env | head -n 4 | sort; true ; } > /tmp/d/exp2_abb0
+            echo "gate nightly-v2: $(wc -c </tmp/d/exp2_abb0) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'exp2_abb0'
+  nightly-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/exp2_abb0
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  sk-Hans:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Braise the rotated logs
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for file in /etc/sk*; do basename "$file"; done | tac; true ; } > /tmp/d/k5a1fZH2wwH
+            echo "gate vera-smoke: $(wc -c </tmp/d/k5a1fZH2wwH) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'k5a1fZH2wwH'
+  vera-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  B5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Texture lighting for the nightly run
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; if [[ -O ~ ]] ; then echo true; else echo false; fi; true ; } > /tmp/d/theta.moor
+            echo "gate gating: $(wc -c </tmp/d/theta.moor) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'theta.moor'
+  gating:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/theta.moor
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  frostx:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Meanwhile sign the worker pool
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; cp /etc/hosts "/tmp/w0.log" && sed -i '1d' "/tmp/w0.log" && diff /etc/hosts "/tmp/w0.log" | head -n 4; true ; } > /tmp/d/1c2dd73788
+            echo "gate polaris-rc: $(wc -c </tmp/d/1c2dd73788) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '1c2dd73788'
+  polaris-rc:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/1c2dd73788
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  store-armv7-latest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Defend the mesh routes
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; printf 'red\t99\nseed\t50\nbridge\t62\neagle\t53\n' >"/tmp/garage_0427.tsv" && cut -f1 "/tmp/garage_0427.tsv"; true ; } > /tmp/d/Etd
+            echo "gate vera-test: $(wc -c </tmp/d/Etd) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'Etd'
+  vera-test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/Etd
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  panWorkerRequest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Compress the stereo mix following lunch
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; compgen -k | sort | uniq -d | cut -c1-20; true ; } > /tmp/d/20200725
+            echo "gate v6-alpha: $(wc -c </tmp/d/20200725) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '20200725'
+  v6-alpha:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/20200725
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  OSCAR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Carefully loop the lower thirds
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; hash python3 2>/dev/null && echo installed||echo "not installed"; true ; } > /tmp/d/fnv_21e3850b5
+            echo "gate may8-release: $(wc -c </tmp/d/fnv_21e3850b5) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'fnv_21e3850b5'
+  may8-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  version2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: SRCH31
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type f -name '*release' -newer /etc/hosts -exec wc -c {} + | tail -1; true ; } > /tmp/d/15.08.2022
+            echo "gate break-prod: $(wc -c </tmp/d/15.08.2022) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '15.08.2022'
+  break-prod:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  columnMbMax:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: May Deployment Run
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo | expand -t 4 | tr -s ' '; true ; } > /tmp/d/md5_153aa7
+            echo "gate publish: $(wc -c </tmp/d/md5_153aa7) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'md5_153aa7'
+  publish:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/md5_153aa7
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  mk2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: toggle gpio
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; if grep -q 'PS1' ~/.bashrc; then echo good; else echo bad; fi; true ; } > /tmp/d/wave-glacier-packet-kernel
+            echo "gate ruby3-bench: $(wc -c </tmp/d/wave-glacier-packet-kernel) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'wave-glacier-packet-kernel'
+  ruby3-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/wave-glacier-packet-kernel
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  rgt-089827:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: double tap skeleton loader
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; grep -n 'nobody' /etc/passwd /etc/group | sort -u; true ; } > /tmp/d/temp-905f2
+            echo "gate py310-ship: $(wc -c </tmp/d/temp-905f2) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'temp-905f2'
+  py310-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/temp-905f2
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  q5c0o0:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Besiege the CVE list
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; ls /etc | grep -v '^[a-m]' | tail -1; true ; } > /tmp/d/c97c69ac6f
+            echo "gate auh-check: $(wc -c </tmp/d/c97c69ac6f) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'c97c69ac6f'
+  auh-check:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/c97c69ac6f
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  assertALLOC:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Tomorrow format the accessibility audit
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; /usr/bin/ls --inode /var | tail; true ; } > /tmp/d/aqCD1lMvBe
+            echo "gate teh-ci: $(wc -c </tmp/d/aqCD1lMvBe) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'aqCD1lMvBe'
+  teh-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  user-284-sensor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Audit the revenue split net of tax
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for f in /etc/default/*; do echo "${f}"; done | head -n 3; true ; } > /tmp/d/release-v1.14.34
+            echo "gate verify-full-docker-image: $(wc -c </tmp/d/release-v1.14.34) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'release-v1.14.34'
+  verify-full-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  ryo42:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: DO NOT skip the key ring
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; echo "what's next?" | tr ' ' '\n' | awk '{print toupper(substr($0,1,1)) substr($0,2)}' | paste -sd ' '; true ; } > /tmp/d/pulseHollowReef
+            echo "gate b-2: $(wc -c </tmp/d/pulseHollowReef) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'pulseHollowReef'
+  b-2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  ctrlrow:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Binning so we can sleep
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for x in cat tiger dog owl; do printf '%-8s %d\n' "$x" ${#x}; done; true ; } > /tmp/d/TICKET_061535
+            echo "gate yolo: $(wc -c </tmp/d/TICKET_061535) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'TICKET_061535'
+  yolo:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  widget-noon-apple:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Shrink wrap labeled if needed
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; grep -Irc export /etc/security 2>/dev/null | tail -n 10; true ; } > /tmp/d/e0o0J1GLgNWUgnTWRYVh6
+            echo "gate chore-8142: $(wc -c </tmp/d/e0o0J1GLgNWUgnTWRYVh6) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'e0o0J1GLgNWUgnTWRYVh6'
+  chore-8142:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/e0o0J1GLgNWUgnTWRYVh6
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  ack_svc:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Fall back to dumping the dead tuples
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 2 -type l -name '*tab' -size -2 -exec basename '{}' \; 2>/dev/null | sort -r; true ; } > /tmp/d/titaNBLObHaWk
+            echo "gate APP-135: $(wc -c </tmp/d/titaNBLObHaWk) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'titaNBLObHaWk'
+  APP-135:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  logServoLock:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Test Matrix Mocking ACTIVE
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; ls -thF --ignore="*.gz" /opt /usr/bin | paste -sd ' '; true ; } > /tmp/d/sample-98c
+            echo "gate q2-release: $(wc -c </tmp/d/sample-98c) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'sample-98c'
+  q2-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/sample-98c
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  DBFactory:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Can we join the bronze layer yet
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; printenv | head -n12 | awk -F "=" '{ print $1 }' | tail -n 5; true ; } > /tmp/d/769cf765-26b4-3b5b
+            echo "gate update-retry: $(wc -c </tmp/d/769cf765-26b4-3b5b) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - '769cf765-26b4-3b5b'
+  update-retry:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  CATEGORY_DYNAMIC:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: despawning crafting recipes in background
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; if [[ -d $HOME ]]; then echo true; else echo false; fi; true ; } > /tmp/d/sha_50c3196
+            echo "gate luna-smoke: $(wc -c </tmp/d/sha_50c3196) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'sha_50c3196'
+  luna-smoke:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/sha_50c3196
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  heidibot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Seriously inform the reviewers this time
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; echo "can't stop now" | base64; true ; } > /tmp/d/env.log
+            echo "gate INFRA-262: $(wc -c </tmp/d/env.log) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'env.log'
+  INFRA-262:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/env.log
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  FastFinalDynamic:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Protocol Pebble
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; cat /etc/passwd | grep -e "bash" | cut -d: -f1; true ; } > /tmp/d/ridgeCopperKappaKernel
+            echo "gate py311-bench: $(wc -c </tmp/d/ridgeCopperKappaKernel) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'ridgeCopperKappaKernel'
+  py311-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  galaxy-node-command:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Split the training loop every 2 steps
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; echo -n "spring summer autumn winter" | cut -c1-6; true ; } > /tmp/d/seed-40t
+            echo "gate india: $(wc -c </tmp/d/seed-40t) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'seed-40t'
+  india:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  idx_ReceiptNodeOption8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Many thanks for report
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; find /tmp -maxdepth 2 -type d -name \*.log -exec basename {} \; 2>/dev/null | sort -r; true ; } > /tmp/d/CobaltHeathBurst
+            echo "gate Rollout_Image6: $(wc -c </tmp/d/CobaltHeathBurst) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'CobaltHeathBurst'
+  Rollout_Image6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  tb_task_bundle:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Produce
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; echo secret >"/tmp/carrot2022.10.08.dat" && shred -u "/tmp/carrot2022.10.08.dat" && ls "/tmp/carrot2022.10.08.dat" 2>/dev/null || echo shredded; true ; } > /tmp/d/draft_e6e357f5
+            echo "gate q1-ship: $(wc -c </tmp/d/draft_e6e357f5) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'draft_e6e357f5'
+  q1-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/k5a1fZH2wwH
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+  SUPER_STORE_VALUE:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Query the sequence counters in batches
+          command: |
+            mkdir -p /tmp/d
+            { set +o pipefail 2>/dev/null; for p in wednesday friday tuesday thursday monday; do echo "<${p}>"; done|sort -r; true ; } > /tmp/d/QUARK_RASTER
+            echo "gate tweak-cache-bug: $(wc -c </tmp/d/QUARK_RASTER) bytes total"
+      - persist_to_workspace:
+          root: /tmp/d
+          paths:
+            - 'QUARK_RASTER'
+  tweak-cache-bug:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/d
+      - run:
+          name: Read handoff data
+          command: |
+            cat /tmp/d/QUARK_RASTER
+      - run:
+          name: Get sources
+          command: git clone --quiet --no-single-branch --filter=tree:0 --no-tags https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Sync asset bundles
+          command: cat images-baked.tgz | tar xzf -
+      - run:
+          name: Record build info
+          command: cmake --version
+      - run:
+          name: Verify output
+          command: sleep 60
+      - run:
+          command: "./make-thread"
+
+workflows:
+  pipeline:
+    jobs:
+      - sk-Hans
+      - version2
+      - vera-smoke:
+          requires:
+            - sk-Hans
+            - version2
+      - break-prod:
+          requires:
+            - sk-Hans
+            - version2
+      - q1-ship:
+          requires:
+            - sk-Hans
+            - version2
+      - b-2:
+          requires:
+            - sk-Hans
+            - version2
+      - py311-bench:
+          requires:
+            - sk-Hans
+            - version2
+      - Rollout_Image6:
+          requires:
+            - sk-Hans
+            - version2
+      - APP-135:
+          requires:
+            - sk-Hans
+            - version2
+      - polaris-rev:
+          requires:
+            - sk-Hans
+            - version2
+      - teh-ci:
+          requires:
+            - sk-Hans
+            - version2
+      - may8-release:
+          requires:
+            - sk-Hans
+            - version2
+      - yolo:
+          requires:
+            - sk-Hans
+            - version2
+      - verify-full-docker-image:
+          requires:
+            - sk-Hans
+            - version2
+      - update-retry:
+          requires:
+            - sk-Hans
+            - version2
+      - india:
+          requires:
+            - sk-Hans
+            - version2
+      - reducePre
+      - intergration-42:
+          requires:
+            - reducePre
+      - heidibot:
+          requires:
+            - reducePre
+      - INFRA-262:
+          requires:
+            - heidibot
+      - kappa_t:
+          requires:
+            - heidibot
+      - p-new:
+          requires:
+            - kappa_t
+      - panWorkerRequest:
+          requires:
+            - kappa_t
+      - v6-alpha:
+          requires:
+            - panWorkerRequest
+      - mk2:
+          requires:
+            - panWorkerRequest
+      - ruby3-bench:
+          requires:
+            - mk2
+      - q5c0o0:
+          requires:
+            - mk2
+      - auh-check:
+          requires:
+            - q5c0o0
+      - columnMbMax:
+          requires:
+            - q5c0o0
+      - publish:
+          requires:
+            - columnMbMax
+      - store-armv7-latest:
+          requires:
+            - columnMbMax
+      - vera-test:
+          requires:
+            - store-armv7-latest
+      - CATEGORY_DYNAMIC:
+          requires:
+            - store-armv7-latest
+      - luna-smoke:
+          requires:
+            - CATEGORY_DYNAMIC
+      - logServoLock:
+          requires:
+            - CATEGORY_DYNAMIC
+      - q2-release:
+          requires:
+            - logServoLock
+      - brown200:
+          requires:
+            - logServoLock
+      - nightly-v2:
+          requires:
+            - brown200
+      - B5:
+          requires:
+            - brown200
+      - gating:
+          requires:
+            - B5
+      - SUPER_STORE_VALUE:
+          requires:
+            - B5
+      - tweak-cache-bug:
+          requires:
+            - SUPER_STORE_VALUE
+      - widget-noon-apple:
+          requires:
+            - SUPER_STORE_VALUE
+      - chore-8142:
+          requires:
+            - widget-noon-apple
+      - rgt-089827:
+          requires:
+            - widget-noon-apple
+      - py310-ship:
+          requires:
+            - rgt-089827
+      - frostx:
+          requires:
+            - rgt-089827
+      - polaris-rc:
+          requires:
+            - frostx
